@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-//Copy from net/http/httputil and add some code to replace NewSingleHostReverseProxy()
+//CV from net/http/httputil NewSingleHostReverseProxy()
 func NewProxy(target *url.URL) *httputil.ReverseProxy {
 	targetQuery := target.RawQuery
 	director := func(req *http.Request) {
@@ -31,7 +31,7 @@ func NewProxy(target *url.URL) *httputil.ReverseProxy {
 	return &httputil.ReverseProxy{Director: director}
 }
 
-//Copy from net/http/httputil
+//CV from net/http/httputil
 func singleJoiningSlash(a, b string) string {
 	aslash := strings.HasSuffix(a, "/")
 	bslash := strings.HasPrefix(b, "/")
@@ -43,7 +43,7 @@ func singleJoiningSlash(a, b string) string {
 	}
 	return a + b
 }
-//Copy from net/http/httputil
+//CV from net/http/httputil
 func joinURLPath(a, b *url.URL) (path, rawpath string) {
 	if a.RawPath == "" && b.RawPath == "" {
 		return singleJoiningSlash(a.Path, b.Path), ""

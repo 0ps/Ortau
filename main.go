@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 )
 
 type ReverseProxy struct {
@@ -23,16 +24,19 @@ type Cfx struct {
 }
 
 func (p *ReverseProxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	log.Println("[Info] UserAgent: ", r.UserAgent())
+	//log.Println("[Info] UserAgent: ", r.UserAgent())
 	remote, err := url.Parse(p.RedirectUrl)
 	if err != nil {
 		log.Println("[Error] Error is : ", err)
 	}
 
 	c2remote, err := url.Parse(conf.GetCfgSectionKey("default", "c2Url"))
+	log.Println(c2remote)
 
-	//根据UA头判断转发
-	if r.UserAgent() == conf.GetCfgSectionKey("filter", "ua") {
+	//log.Println(conf.GetCfgSectionKey("filter", "uaKey"))
+	//根据uaKey判断转发
+	if strings.Contains(r.UserAgent(), conf.GetCfgSectionKey("filter", "uaKey")) == true {
+		log.Println("[Info] Try to redirect...")
 		proxy := NewProxy(c2remote)
 		proxy.ServeHTTP(w, r)
 	} else {
@@ -52,9 +56,9 @@ func Runing() {
 			break
 		}
 	}
-	ua := conf.GetCfgSectionKey("filter", "ua")
+	ua := conf.GetCfgSectionKey("filter", "uaKey")
 	if ua == "" {
-		log.Println("[Error] Ua is null,Please check config.ini ...")
+		log.Println("[Error] UaKey is null,Please check config.ini ...")
 		os.Exit(1)
 	}
 

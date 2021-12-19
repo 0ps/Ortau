@@ -21,13 +21,13 @@ func MakeCfg() bool {
 	if checkCfgFileIsExist(fileName) == false {
 		f, err := os.Create(fileName)
 		if err != nil {
-			log.Println("[Error] Error is : ",err)
+			log.Println("[Error] Error is : ", err)
 		}
 
 		defer f.Close()
 		_, err = f.Write([]byte(static.Config))
 		if err != nil {
-			log.Println("[Error] Error is : ",err)
+			log.Println("[Error] Error is : ", err)
 		}
 
 		return false
@@ -39,7 +39,7 @@ func MakeCfg() bool {
 func GetCfgSectionKey(section string, key string) string {
 	var cfgValue string
 
-	for{
+	for {
 		if MakeCfg() == false {
 			log.Println("[Info] Not found cfg...Try to make config.ini...")
 		} else {
