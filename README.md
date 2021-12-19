@@ -3,8 +3,9 @@
 
 ## 0x01 使用
 
-1. 运行生成默认配置文件`config.ini`
-2. 再次运行`Ortau`
+~~~shell
+./Ortau
+~~~
 
 <br/>
 
