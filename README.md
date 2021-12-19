@@ -29,13 +29,13 @@ set useragent "Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Ortau";
 ~~~
 <br/>
 <br/>
-<br/>
+
 CS Listener配置为：
 
 ![image-20211219220450991](https://typora-mine.oss-cn-beijing.aliyuncs.com/typora/image-20211219220450991.png)
 <br/>
 <br/>
-<br/>
+
 iptables禁掉8092端口，仅允许127.0.0.1访问：
 
 ~~~shell
@@ -44,7 +44,7 @@ iptables -I INPUT -s 127.0.0.1 -p tcp --dport 8092 -j ACCEPT
 ~~~
 <br/>
 <br/>
-<br/>
+
 
 ## 0x03
 
